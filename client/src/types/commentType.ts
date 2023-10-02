@@ -1,4 +1,4 @@
-export type comment={
+export interface comment{
     videoId?:string
     pic?:string
     name:string
