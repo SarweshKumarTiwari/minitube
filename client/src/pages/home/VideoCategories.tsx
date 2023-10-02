@@ -1,26 +1,28 @@
-import {useLocation } from "react-router-dom"
+import { useLocation } from "react-router-dom"
+import SubNavBar from "../../components/navbar/SubNavBar";
+import Button from "../../components/Button";
 export default function VideoCategories() {
-    const location=useLocation();
-  return (
-    <div className="p-2 mx-4 border-t-[1px] border-gray-200 md:w-full flex space-x-4 overflow-y-scroll">
-        <a href="/" className={`p-2 rounded-lg border ${location.pathname==="/"?"bg-greenc text-white border-greenc ":"border-gray-200 "} `}>
-            <p>All</p>
-        </a>
-        <a href="/" className={`p-2 rounded-lg border ${location.pathname==="sports"?"bg-greenc text-white border-greenc ":"border-gray-200 "} `}>
-            <p>Sports</p>
-        </a>
-        <a href="/" className={`p-2 rounded-lg border ${location.pathname==="food"?"bg-greenc text-white border-greenc ":"border-gray-200 "} `}>
-            <p>Food</p>
-        </a>
-        <a href="/" className={`p-2 rounded-lg border ${location.pathname==="music"?"bg-greenc text-white border-greenc ":"border-gray-200 "} `}>
-            <p>Music</p>
-        </a>
-        <a href="/" className={`p-2 rounded-lg border ${location.pathname==="news"?"bg-greenc text-white border-greenc ":"border-gray-200 "} `}>
-            <p>News</p>
-        </a>
-        <a href="/" className={`p-2 rounded-lg border ${location.pathname==="entertainment"?"bg-greenc text-white border-greenc ":"border-gray-200 "} `}>
-            <p>Entertainment</p>
-        </a>
-    </div>
-  )
+    const location = useLocation();
+    return (
+        <SubNavBar >
+            <Button className={location.pathname === "/" ? "bg-greenc text-white border-greenc ":""}>
+                <p>All</p>
+            </Button>
+            <Button className={location.pathname === "sports" ? "bg-greenc text-white border-greenc":""}>
+                <p>Sports</p>
+            </Button>
+            <Button className={location.pathname === "food" ? "bg-greenc text-white border-greenc":""}>
+                <p>Food</p>
+            </Button>
+            <Button className={location.pathname === "music" ? "bg-greenc text-white border-greenc":""}>
+                <p>Music</p>
+            </Button>
+            <Button className={location.pathname === "news" ? "bg-greenc text-white border-greenc":""}>
+                <p>News</p>
+            </Button>
+            <Button className={location.pathname === "entertainment" ? "bg-greenc text-white border-greenc " : ""}>
+                <p>Entertainment</p>
+            </Button>
+        </SubNavBar>
+    )
 }
