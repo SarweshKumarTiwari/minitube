@@ -32,7 +32,7 @@ function AfterAuth() {
                 </svg>
                 <p>Watch History</p>
             </a>
-            <a href="/" className="flex p-2 space-x-[4px] text-gray-600 text-lg items-center" >
+            <a href="/myvideos" className="flex p-2 space-x-[4px] text-gray-600 text-lg items-center" >
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" className="fill-gray-600" viewBox="0 0 16 16">
                     <path fillRule="evenodd" d="M0 5a2 2 0 0 1 2-2h7.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 4.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 13H2a2 2 0 0 1-2-2V5zm11.5 5.175 3.5 1.556V4.269l-3.5 1.556v4.35zM2 4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h7.5a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1H2z" />
                 </svg>
@@ -60,10 +60,10 @@ export default function SmallScreenNav(props: { isUser: boolean,userName:string}
     return (
         <div className="md:hidden md:invisible z-10 sticky top-0 bg-[#ffffff]">
             <div className="p-2 m-2 flex justify-between items-center ">
-                <div className="flex items-center space-x-[6px]">
+                <a href="/" className="flex items-center space-x-[6px]">
                     <img src={logo1} alt="logo" width={32} height={32} />
                     <h2 className="text-2xl text-gray-800">MiniTube</h2>
-                </div>
+                </a>
                 <div className="flex mr-2 space-x-[12px]">
                     <div className="p-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" className="fill-gray-400 stroke-2" viewBox="0 0 16 16">

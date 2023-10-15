@@ -24,7 +24,7 @@ function AfterAuth(props: { dropdown: boolean, setdropdown: React.Dispatch<SetSt
                         <path d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z" />
                     </svg>
                 </a>
-                <a href="/" className=" p-2 text-gray-600 text-lg">
+                <a href="/myvideos" className=" p-2 text-gray-600 text-lg">
                     <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" className="fill-greenc" viewBox="0 0 16 16">
                         <path fillRule="evenodd" d="M0 5a2 2 0 0 1 2-2h7.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 4.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 13H2a2 2 0 0 1-2-2V5zm11.5 5.175 3.5 1.556V4.269l-3.5 1.556v4.35zM2 4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h7.5a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1H2z" />
                     </svg>
@@ -63,7 +63,7 @@ export default function BigScreenNav(props: { isUser: boolean,userName:string}) 
                 </div>
                 {props.isUser ? <AfterAuth dropdown={dropdown} setdropdown={setdropdown} /> : <BeforeAuth />}
             </div>
-            {dropdown && <div className="relative">
+            {dropdown && <div className="relative" >
                 <div className="absolute bg-gray-100 rounded-lg top-0 right-0 mr-4 max-w-[12rem] p-2 border-[1px]">
                     
                     <a href="/" className="flex p-2 space-x-[4px] text-gray-600  items-center" >

@@ -44,7 +44,7 @@ export default function AfterAuthHome() {
   return (
     <Container>
       <GridContainer>
-        {arr.map((e, i) => <Link to="/watch" className="p-1 flex flex-col group space-y-1 " key={i}>
+        {arr.map((e, i) => <Link to="/watch" state={e} className="p-1 flex flex-col group space-y-1 " key={i}>
           <img src={e.image} alt="gv" className="rounded-lg w-full h-[10rem] group-hover:blur-sm" />
           <div className="p-4">
             <h3 className="text-md text-bold">{e.title}</h3>
