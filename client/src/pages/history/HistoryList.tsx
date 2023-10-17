@@ -50,30 +50,32 @@ export default function HistoryList() {
         <h1 className="text-gray-600 text-center mb-2 text-3xl">History : </h1>
         <ListContainers>
           {history.length ? history.map(
-            (e, i) => <Link to="/watch" state={e}>
-              <VideoCard >
-                <img src={e.image} alt="gv" className="rounded-lg w-fit h-[10rem] hover:bg-greenc" />
-                <button type='button' className="absolute top-0 right-0 mt-1 mr-2 p-2  group-hover:visible" onClick={() => removeHistory(i)}>
-                  <p className="text-sm text-red-500">Remove</p>
-                </button>
-                <div className="p-4 w-full">
-                  <div className="flex text-gray-600 text-sm items-center space-x-1">
-                    <p>{e.channel}</p>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" className="fill-gray-600" viewBox="0 0 16 16">
-                      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
-                    </svg>
+            (e, i) => <div className="relative" key={i}>
+              <Link to="/watch" state={e} >
+                <VideoCard >
+                  <img src={e.image} alt="gv" className="rounded-lg w-fit h-[10rem] hover:bg-greenc" />
+                  <div className="p-4 w-full">
+                    <div className="flex text-gray-600 text-sm items-center space-x-1">
+                      <p>{e.channel}</p>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" className="fill-gray-600" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                      </svg>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <h3 className="text-md text-bold">{e.title}</h3>
+                      <p> {e.publised_time}</p>
+                    </div>
+                    <div className="text-sm text-gray-500 flex space-x-2 mt-2 justify-end">
+                      <p>{e.description}</p>
+                      <p className='invisible sm:visible'>{e.watch_duration}</p>
+                    </div>
                   </div>
-                  <div className="flex justify-between items-center">
-                    <h3 className="text-md text-bold">{e.title}</h3>
-                    <p> {e.publised_time}</p>
-                  </div>
-                  <div className="text-sm text-gray-500 flex space-x-2 mt-2 justify-end">
-                    <p>{e.description}</p>
-                    <p className='invisible sm:visible'>{e.watch_duration}</p>
-                  </div>
-                </div>
-              </VideoCard>
-            </Link>
+                </VideoCard>
+              </Link>
+              <button type='button' className="absolute top-0 right-0 mt-1 mr-2 p-2  group-hover:visible" onClick={() => { removeHistory(i); console.log("kfyu") }}>
+                <p className="text-sm text-red-500">Remove</p>
+              </button>
+            </div>
           )
             :
             <div className="mt-8 p-2 flex justify-center space-x-4">
