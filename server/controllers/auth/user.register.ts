@@ -3,7 +3,6 @@ import verifyData from "../../services/user.auth/users.params.verify";
 import usersModels from "../../models/userModels/users.models";
 import password from "../../utils/password";
 import token from "../../utils/tokenHandler";
-import sendEmails from "../../services/sendEmails";
 
 class RegisterUser {
     async verifyUserAttributes(req: Request, res: Response, next: NextFunction) {
@@ -32,16 +31,6 @@ class RegisterUser {
             const data = await usersModels.createUser(req.body);
             if (!data) {
                 return res.sendStatus(400);
-            }
-            const email = await sendEmails(
-                {
-                    to: req.body.email,
-                    subject: "Welcome to our Team",
-                    text: "Hey " + req.body.name + " you are successfully registered",
-                }
-            )
-            if (!email) {
-                return res.status(400).json({error:"some error occured while sending email"});
             }
             return res.status(201).cookie("Access_Token", token.generateToken(
                 {

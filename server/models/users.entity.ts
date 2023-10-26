@@ -13,6 +13,8 @@ const users:Schema=new Schema({
         type:String,
         required:true
     }
+},{
+    timestamps:true
 })
 
 export default  mongoose.model("users",users);
