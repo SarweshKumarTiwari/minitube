@@ -34,9 +34,11 @@ class RegisterUser {
             }
             return res.status(201).cookie("Access_Token", token.generateToken(
                 {
-                    name: data.name,
-                    email: data.email,
-                    id: data._id
+                    id: data._id,
+                    iat:Date.now()
+                }
+                ,{
+                    expiresIn:"1h"
                 }
             ), {
                 httpOnly: true,

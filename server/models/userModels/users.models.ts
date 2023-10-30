@@ -8,7 +8,7 @@ class UserModels{
     }
 
     async getUserByEmail(emailId:string){
-        return await userModels.findOne({email:emailId},{password:0});
+        return await userModels.findOne({email:emailId},{_id:1,password:1});
     }
 }
 
