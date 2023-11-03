@@ -7,8 +7,12 @@ class UserModels{
         return await data.save();
     }
 
-    async getUserByEmail(emailId:string){
-        return await userModels.findOne({email:emailId},{_id:1,password:1});
+    async getUserByFields(data:{email?:string,_id?:string},fields:{_id?:0|1,password?:0|1,refresh_token?:0|1}){
+        return await userModels.findOne(data,fields);
+    }
+
+    async updateUser(userId:string,data:{password?:string,refresh_token?:string}){
+        return await userModels.findByIdAndUpdate(userId,data);
     }
 }
 

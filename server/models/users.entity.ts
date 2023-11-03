@@ -13,13 +13,10 @@ const users: Schema = new Schema({
         type: String,
         required: true
     },
-    refresh_tokens: [
-        {
-            type: String,
-            required: false,
-            max:[4,"can not access from multiple places"]
-        }
-    ]
+    refresh_token: {
+        type:String,
+        required:false
+    }
 }, {
     timestamps: true
 })
