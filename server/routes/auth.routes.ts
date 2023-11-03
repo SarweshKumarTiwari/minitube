@@ -9,6 +9,8 @@ userRegister.verifyUserAttributes,
 userRegister.isUserExists,
 userRegister.registerUser);
 
-routes.post("/minitube/auth/token",userAuth.verifyAndAuthoriseUser);
+routes.post("/minitube/auth/token",userAuth.authorization);
+routes.get("/minitube/auth/authenticate",userAuth.authenticate,userAuth.check);
+routes.get("/minitube/auth/access_token",userAuth.getAccessToken);
 
 export default routes;
