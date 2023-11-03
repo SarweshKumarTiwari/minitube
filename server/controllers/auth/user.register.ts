@@ -2,7 +2,9 @@ import { Request, Response, NextFunction } from "express";
 import verifyData from "../../services/user.auth/users.params.verify";
 import usersModels from "../../models/userModels/users.models";
 import password from "../../utils/password";
-import token from "../../utils/tokenHandler";
+import dotenv from "dotenv";
+import { getTokens } from "../../services/user.auth/users.credentials.check";
+dotenv.config();
 
 class RegisterUser {
     async verifyUserAttributes(req: Request, res: Response, next: NextFunction) {
@@ -15,7 +17,7 @@ class RegisterUser {
 
     async isUserExists(req: Request, res: Response, next: NextFunction) {
         try {
-            if (await usersModels.getUserByEmail(req.body.email) !== null) {
+            if (await usersModels.getUserByFields({email:req.body.email},{_id:1}) !== null) {
                 return res.status(400).json({ error: "user already exists" });
             }
             next();
@@ -32,19 +34,18 @@ class RegisterUser {
             if (!data) {
                 return res.sendStatus(400);
             }
-            return res.status(201).cookie("Access_Token", token.generateToken(
-                {
-                    id: data._id,
-                    iat:Date.now()
-                }
-                ,{
-                    expiresIn:"1h"
-                }
-            ), {
-                httpOnly: true,
-                sameSite: true,
-                path: "/"
-            }).json({ success: "Successfully created" })
+            const {access_token,refresh_token}=getTokens(data._id as string);
+            res.cookie("at",access_token,{
+                httpOnly:true,
+                secure:true,
+                sameSite:true
+            })
+            res.cookie("at",refresh_token,{
+                httpOnly:true,
+                secure:true,
+                sameSite:true
+            })
+            return res.status(201).json({success:"successfully registered"});
         } catch (error) {
             console.log(error);
             return res.status(500).json({ error: error });
