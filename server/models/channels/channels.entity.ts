@@ -10,6 +10,12 @@ const channels=new Schema({
         required:false,
         default:0
     },
+    subscribers:{
+        type:Number,
+        required:false,
+        default:0
+    }
+    ,
     u_id:{
         type:Schema.Types.ObjectId,
         ref:"users"

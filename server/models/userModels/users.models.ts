@@ -1,4 +1,4 @@
-import userModels from "../users.entity";
+import userModels from "./users.entity";
 import { user } from "../../types/user.types";
 
 class UserModels{

@@ -5,7 +5,7 @@ const videos=new Schema({
         type:String,
         required:true
     },
-    v_type:{
+    v_categ:{
         type:String,
         required:true
     },
@@ -20,6 +20,10 @@ const videos=new Schema({
     v_duration:{
         type:String,
         required:true,
+    },
+    allow_comments:{
+        type:Boolean,
+        default:true
     },
     c_id:{
         type:Schema.Types.ObjectId,
