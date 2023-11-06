@@ -1,3 +1,5 @@
-import body_parser from "body-parser";
+import {json} from "express"
 
-export default body_parser.json();
+export default json({
+    limit:"200mb"
+});
