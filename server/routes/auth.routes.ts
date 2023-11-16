@@ -1,6 +1,6 @@
 import {Router } from "express"
-import userRegister from "../controllers/auth/user.register";
-import userAuth from "../controllers/auth/user.auth";
+import userRegister from "../controllers/auth.controller/user.register";
+import userAuth from "../controllers/auth.controller/user.auth";
 
 const routes=Router();
 
