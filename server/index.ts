@@ -6,7 +6,7 @@ import connectDB from "./config/connectDB";
 import routes from "./routes/auth.routes";
 import cookieParser from "cookie-parser";
 import cors from "./config/config.cors"
-import videoRoutes from "./routes/video.routes";
+
 
 connectDB();
 const app:Application=express();
@@ -17,7 +17,7 @@ app.use(cookieParser());
 app.use(cors);
 
 app.use(routes);
-app.use(videoRoutes);
+
 app.listen(process.env.PORT,()=>{
     try {
         console.log("port is running on "+process.env.PORT);
