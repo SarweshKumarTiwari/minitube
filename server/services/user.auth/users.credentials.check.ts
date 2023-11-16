@@ -1,7 +1,5 @@
-import dotenv from "dotenv"
 import password from "../../utils/password"
 import tokenHandler from "../../utils/tokenHandler";
-dotenv.config();
 
 type creds = {
     _id?:string,
@@ -10,14 +8,14 @@ type creds = {
 export function getTokens(id?:string){
     const access_token = tokenHandler.generateToken({
         iat:Math.floor(Date.now()/1000),
-        exp:Math.floor(Date.now() / 1000)+60,
+        exp:Math.floor(Date.now() / 1000)+60*60,
         uid:id
     },
     process.env.ACCESS_TOKEN as string
     )
     const refresh_token=tokenHandler.generateToken({
         iat:Math.floor(Date.now()/1000),
-        exp:Math.floor(Date.now() / 1000)+(60*60),
+        exp:Math.floor(Date.now() / 1000)+(60*60*24*30),
         uid:id
     },
     process.env.REFRESH_TOKEN as string
