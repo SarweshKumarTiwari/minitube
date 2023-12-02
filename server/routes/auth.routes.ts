@@ -4,13 +4,13 @@ import userAuth from "../controllers/auth.controller/user.auth";
 
 const routes=Router();
 
-routes.post("/minitube/auth/register",
+routes.post("/register",
 userRegister.verifyUserAttributes,
 userRegister.isUserExists,
 userRegister.registerUser);
 
-routes.post("/minitube/auth/token",userAuth.authorization);
-routes.get("/minitube/auth/authenticate",userAuth.authenticate,userAuth.check);
-routes.get("/minitube/auth/access_token",userAuth.getAccessToken);
+routes.post("/token",userAuth.authorization);
+routes.get("/authenticate",userAuth.authenticate,userAuth.check);
+routes.get("/access_token",userAuth.getAccessToken);
 
 export default routes;
