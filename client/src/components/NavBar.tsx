@@ -1,6 +1,6 @@
-import { lazy } from "react";
-const BigScreenNav=lazy(()=>import("./navbar/BigScreenNav"))
-const SmallScreenNav=lazy(()=>import("./navbar/SmallScreenNav"))
+import BigScreenNav from "./navbar/BigScreenNav";
+import SmallScreenNav from "./navbar/SmallScreenNav";
+
 
 export default function NavBar() {
     const props={isUser:true,userName:"xyz"};
