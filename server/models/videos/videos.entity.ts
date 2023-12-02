@@ -17,18 +17,15 @@ const videos=new Schema({
         type:String,
         required:true
     },
-    v_duration:{
-        type:String,
-        required:true,
+    channel:{
+        type:Schema.Types.ObjectId,
+        ref:"channels"
     },
     allow_comments:{
         type:Boolean,
         default:true
     },
-    c_id:{
-        type:Schema.Types.ObjectId,
-        ref:"channels"
-    }
+    
 },{timestamps:true})
 
 export default mongoose.model("videos",videos);

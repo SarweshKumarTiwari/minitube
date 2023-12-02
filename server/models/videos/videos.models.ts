@@ -7,7 +7,7 @@ class VideoModules{
         try {
             return await new videosEntity(data).save();
         } catch (error) {
-            throw new Error(error)
+            throw new Error(error as string)
         }
     }
 
@@ -35,6 +35,14 @@ class VideoModules{
     async deleteVideo(vid_id:string){
         await commentsEntity.deleteMany({v_id:vid_id});
         return await videosEntity.findByIdAndDelete(vid_id);
+    }
+
+    async getVideoByTitle(title:string){
+        const data=await videosEntity.find({v_title:title},{v_title:1,v_url:1});
+        if (data.length===0) {
+            return {data:"no data found"}
+        }
+        return {data:data};
     }
 }
 

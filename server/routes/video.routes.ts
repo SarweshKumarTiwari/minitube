@@ -5,7 +5,13 @@ import videoControllers from "../controllers/video.controllers";
 
 const videoRoutes=Router();
 
-videoRoutes.post("/video/upload",
+videoRoutes.post("/upload",
 userAuth.authenticate,
-uploadFile.array("upload"),
-videoControllers.upload)
+uploadFile.single("upload"),
+videoControllers.upload);
+
+videoRoutes.get("/getvideo",
+userAuth.authenticate,
+videoControllers.getVideo)
+
+export default videoRoutes;
