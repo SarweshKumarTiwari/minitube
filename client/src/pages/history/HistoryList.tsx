@@ -50,11 +50,11 @@ export default function HistoryList() {
         <h1 className="text-gray-600 text-center mb-2 text-3xl">History : </h1>
         <ListContainers>
           {history.length ? history.map(
-            (e, i) => <div className="relative" key={i}>
+            (e, i) => <div key={i}>
               <Link to="/watch" state={e} >
                 <VideoCard >
                   <img src={e.image} alt="gv" className="rounded-lg w-fit h-[10rem] hover:bg-greenc" />
-                  <div className="p-4 w-full">
+                  <div className="relative p-4 w-full">
                     <div className="flex text-gray-600 text-sm items-center space-x-1">
                       <p>{e.channel}</p>
                       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" className="fill-gray-600" viewBox="0 0 16 16">
@@ -69,12 +69,13 @@ export default function HistoryList() {
                       <p>{e.description}</p>
                       <p className='invisible sm:visible'>{e.watch_duration}</p>
                     </div>
+                    <button type='button' className="absolute top-0 right-0 mt-1 mr-2 p-2  group-hover:visible" onClick={(e) => { e.preventDefault();removeHistory(i)}}>
+                      <p className="text-sm text-red-500">Remove</p>
+                    </button>
                   </div>
                 </VideoCard>
               </Link>
-              <button type='button' className="absolute top-0 right-0 mt-1 mr-2 p-2  group-hover:visible" onClick={() => { removeHistory(i); console.log("kfyu") }}>
-                <p className="text-sm text-red-500">Remove</p>
-              </button>
+
             </div>
           )
             :
