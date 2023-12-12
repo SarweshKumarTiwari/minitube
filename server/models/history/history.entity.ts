@@ -1,17 +1,17 @@
 import mongoose,{ Schema } from "mongoose";
 
 const history=new Schema({
-    duration:{
+    title:{
+        type:String,
+        required:true
+    },
+    url:{
         type:String,
         required:true
     },
     u_id:{
         type:Schema.Types.ObjectId,
         ref:"users",
-    },
-    v_id:{
-        type:Schema.Types.ObjectId,
-        ref:"videos"
     }
 },{timestamps:true})
 
