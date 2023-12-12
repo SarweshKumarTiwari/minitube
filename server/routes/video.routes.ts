@@ -10,8 +10,16 @@ userAuth.authenticate,
 uploadFile.single("upload"),
 videoControllers.upload);
 
-videoRoutes.get("/getvideo",
+videoRoutes.get("/getvideo/:v_id?",
 userAuth.authenticate,
 videoControllers.getVideo)
+
+videoRoutes.get("/search/:title?",
+videoControllers.searchVideos);
+
+videoRoutes.put("/comment_status",
+userAuth.authenticate,
+videoControllers.updateComments
+)
 
 export default videoRoutes;
