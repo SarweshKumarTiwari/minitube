@@ -1,11 +1,14 @@
 import HistoryNav from './history/HistoryNav'
 import HistoryList from './history/HistoryList'
+import HistoryContextProvider from '../contexts/history/HistoryContextProvider'
 
 export default function History() {
   return (
     <div>
-      <HistoryNav/>
-      <HistoryList/>
+      <HistoryContextProvider>
+        <HistoryNav />
+        <HistoryList />
+      </HistoryContextProvider>
     </div>
   )
 }

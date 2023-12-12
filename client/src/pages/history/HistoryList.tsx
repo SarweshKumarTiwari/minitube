@@ -1,55 +1,21 @@
-import { useState } from 'react'
+import { useContext } from 'react'
 import Container from '../../components/containers/Container'
 import ListContainers from '../../components/containers/ListContainers'
 import VideoCard from '../../components/cards/VideoCard'
-import videoTypes from "../../types/VideoTypes"
 import { Link } from 'react-router-dom'
+import historyContext from '../../contexts/history/HistoryContext'
 
-interface history extends videoTypes {
-  watch_duration: string
-}
 export default function HistoryList() {
-  const history1: history[] = [
-    {
-      image: "https://img.freepik.com/free-vector/professional-suspense-movie-poster_742173-3470.jpg",
-      channel: "Any channel",
-      publised_time: "2 weeks ago",
-      title: "Fun Video",
-      videoId: "xyz",
-      watch_duration: "12:00",
-      description: " Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ducimus totam blanditiis aspernatur cumque commodi neque est autem facere molestias esse ipsam sequi vel quis cupiditate vitae, deserunt numquam laborum veniam."
-    },
-    {
-      image: "https://img.freepik.com/free-vector/professional-suspense-movie-poster_742173-3470.jpg",
-      channel: "Any channel",
-      publised_time: "2 weeks ago",
-      title: "Fun Video",
-      videoId: "xyz",
-      watch_duration: "12:00",
-      description: " Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ducimus totam blanditiis aspernatur cumque commodi neque est autem facere molestias esse ipsam sequi vel quis cupiditate vitae, deserunt numquam laborum veniam."
-    }, {
-      image: "https://img.freepik.com/free-vector/professional-suspense-movie-poster_742173-3470.jpg",
-      channel: "Any channel",
-      publised_time: "2 weeks ago",
-      title: "Fun Video",
-      videoId: "xyz",
-      watch_duration: "12:00",
-      description: " Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ducimus totam blanditiis aspernatur cumque commodi neque est autem facere molestias esse ipsam sequi vel quis cupiditate vitae, deserunt numquam laborum veniam."
-    }
-  ]
-  const [history, sethistory] = useState(history1);
-  const removeHistory = (id: number) => {
-    const duplicate = [...history]
-    duplicate.splice(id, 1);
-    sethistory(duplicate);
-  }
+  
+  const history=useContext(historyContext);
+  
 
   return (
     <Container>
       <div className='w-full'>
         <h1 className="text-gray-600 text-center mb-2 text-3xl">History : </h1>
         <ListContainers>
-          {history.length ? history.map(
+          {history?.historyData?.length ? history.historyData.map(
             (e, i) => <div key={i}>
               <Link to="/watch" state={e} >
                 <VideoCard >
@@ -67,9 +33,8 @@ export default function HistoryList() {
                     </div>
                     <div className="text-sm text-gray-500 flex space-x-2 mt-2 justify-end">
                       <p>{e.description}</p>
-                      <p className='invisible sm:visible'>{e.watch_duration}</p>
                     </div>
-                    <button type='button' className="absolute top-0 right-0 mt-1 mr-2 p-2  group-hover:visible" onClick={(e) => { e.preventDefault();removeHistory(i)}}>
+                    <button type='button' className="absolute top-0 right-0 mt-1 mr-2 p-2  group-hover:visible" onClick={(e) => { e.preventDefault();history.clearOneHistory(i)}}>
                       <p className="text-sm text-red-500">Remove</p>
                     </button>
                   </div>
