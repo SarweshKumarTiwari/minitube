@@ -1,6 +1,8 @@
 import {Request,Response} from "express";
 import uploadOnCloudinary from "../services/video.services/cloudUpload.service";
 import videosModels from "../models/videos/videos.models";
+import asyncHandler from "../utils/asyncHandler";
+import { AppError } from "../utils/errorHander";
 
 class VideoController {
     async upload(req:Request,res:Response){
@@ -31,15 +33,27 @@ class VideoController {
 
     }
 
-    async getVideo(req:Request,res:Response){
-        try {
-            if (!req.body.v_id) {
-                return res.status(400).json({error:"video id is not given"})
+    public getVideo = asyncHandler(async function(req:Request,res:Response){
+            if (!req.params.v_id) {
+                throw new AppError("video Id is not given",400);
             }
-            const result=await videosModels.getOneVideo(req.body.v_id);
+            const result=await videosModels.getOneVideo(req.params.v_id);
             return res.status(200).json({success:result});
+    })
+
+    public searchVideos = asyncHandler(async function(req:Request,res:Response){
+        const title=req.params.title;
+        const data=await videosModels.getVideoByTitle(title,);
+        return res.status(200).json({success:data.data})
+    })
+
+    async updateComments(req:Request,res:Response){
+        try {
+            await videosModels.updateVideo(req.body.v_id,{allow_comments:req.body.comments})
+            return res.status(200).json({success:`Updated comment status to ${req.body.comments}`})
         } catch (error) {
-            return res.status(400).json({error:error});
+            console.log(error);
+            return res.status(500).json({error:error})
         }
     }
 
