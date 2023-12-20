@@ -1,8 +1,6 @@
 import multer from "multer";
-import path from "path"
 const storage=multer.diskStorage({
     destination(req, file, callback) {
-        console.log(path.resolve());
         callback(null,"./public/tmp")
     },
     filename(req, file, callback) {
