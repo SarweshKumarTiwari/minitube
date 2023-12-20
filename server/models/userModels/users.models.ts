@@ -7,7 +7,7 @@ class UserModels{
         return await data.save();
     }
 
-    async getUserByFields(data:{email?:string,_id?:string},fields:{_id?:0|1,password?:0|1,refresh_token?:0|1}){
+    async getUserByFields(data:{email?:string,_id?:string},fields:{_id?:0|1,password?:0|1,refresh_token?:0|1,name?:0|1}){
         return await userModels.findOne(data,fields);
     }
 
