@@ -46,7 +46,7 @@ class VideoModules{
     }
 
     async getVideoByTitle(title:string,limit:number=9){
-        const data=await videosEntity.find({v_title:title},{v_title:1,v_url:1},{limit:limit});
+        const data=await videosEntity.find({v_title:title},{limit:limit});
         if (data.length===0) {
             return {data:"no data founded"}
         }

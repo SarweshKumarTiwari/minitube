@@ -13,6 +13,10 @@ const videos=new Schema({
         type:String,
         required:false
     },
+    v_cover:{
+        type:String,
+        required:true
+    },
     v_url:{
         type:String,
         required:true

@@ -7,7 +7,7 @@ const videoRoutes=Router();
 
 videoRoutes.post("/upload",
 userAuth.authenticate,
-uploadFile.single("upload"),
+uploadFile.fields([{name:"cover",maxCount:1},{name:"video",maxCount:1}]),
 videoControllers.upload);
 
 videoRoutes.get("/getvideo/:v_id?",

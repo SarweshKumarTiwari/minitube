@@ -3,23 +3,29 @@ import uploadOnCloudinary from "../services/video.services/cloudUpload.service";
 import videosModels from "../models/videos/videos.models";
 import asyncHandler from "../utils/asyncHandler";
 import { AppError } from "../utils/errorHander";
+type modified={
+    [fieldname:string]:Express.Multer.File[]
+}
 
 class VideoController {
     async upload(req:Request,res:Response){
         const request=req.body
         try {
-            if (!req.file) {
+            if (!req.files) {
                 return res.status(400).json({error:"No file provided"})
             }
             if (!(request.v_title&&request.v_categ&&request.channel)) {
                 return res.status(400).json({error:"Some data is missing"});
             }
-            console.log(req.body);
-            const url=await uploadOnCloudinary(req.file.path);
-            if (!url) {
+            console.log(req.files);
+            const files=req.files as modified;
+            const cover_url=await uploadOnCloudinary(files['cover'][0].path);
+            const url=await uploadOnCloudinary(files['video'][0].path);
+            if (!url||!cover_url) {
                 return res.status(400).json({error:"something happened while uploading"})
             }
             req.body.v_url=url?.url;
+            req.body.v_cover=cover_url?.url
             const result=await videosModels.insertVideo(req.body);
             if (!result) {
                 return res.status(400).json({error:"something happened not inserted"})
@@ -43,7 +49,7 @@ class VideoController {
 
     public searchVideos = asyncHandler(async function(req:Request,res:Response){
         const title=req.params.title;
-        const data=await videosModels.getVideoByTitle(title,);
+        const data=await videosModels.getVideoByTitle(title);
         return res.status(200).json({success:data.data})
     })
 
