@@ -3,13 +3,15 @@ import tokenHandler from "../../utils/tokenHandler";
 
 type creds = {
     _id?:string,
-    password: string
+    password: string,
+    name?:string
 }
-export function getTokens(id?:string){
+export function getTokens(id?:string,name?:string){
     const access_token = tokenHandler.generateToken({
         iat:Math.floor(Date.now()/1000),
         exp:Math.floor(Date.now() / 1000)+60*60,
-        uid:id
+        uid:id,
+        name:name
     },
     process.env.ACCESS_TOKEN as string
     )
@@ -27,7 +29,7 @@ export default async function checkCredentials(given_password: string, credentia
         if (!await password.decrypt(given_password, credentials.password)) {
             return { error: "email or password is not valid" }
         }
-        const {access_token,refresh_token}=getTokens(credentials._id)
+        const {access_token,refresh_token}=getTokens(credentials._id,credentials.name)
         return {refresh_token:refresh_token,access_token:access_token};
     } catch (error) {
         return {error:error as string};
