@@ -6,7 +6,6 @@ function useOutsideAlerter(ref:MutableRefObject<null|HTMLButtonElement>,data:{dr
         data.setDrop(!data)
       }
     }
-    console.log(Date.now())
     document.addEventListener("click", (e)=>handleClickOutside(e.target));
     return () => {
       document.removeEventListener("mousedown", (e)=>handleClickOutside(e.target));
