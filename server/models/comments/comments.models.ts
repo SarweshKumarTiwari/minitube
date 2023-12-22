@@ -12,7 +12,9 @@ class CommentModels{
         if (!Types.ObjectId.isValid(video_id)) {
             throw new AppError("Bad request id is not valid",400);
         }
-        const result=await commentEntity.find({v_id:video_id},{v_id:0,u_id:0});
+        const result=await commentEntity
+        .find({v_id:video_id})
+        .select("-v_id -u_id");
         if (!result.length) {
             throw new AppError("No comments Found",400);
         }
