@@ -1,15 +1,12 @@
 
-import AfterAuthHome from './home/AfterAuthHome'
-import BeforeAuthHome from './home/BeforeAuthHome'
+import HomeContent from './home/HomeContent'
 import VideoCategories from './home/VideoCategories'
 
-
 export default function Home() {
-  const userData={isUser:true,username:"xyz"}
   return (
     <div>
       <VideoCategories/>
-      {userData.isUser?<AfterAuthHome/>:<BeforeAuthHome/>}
+      <HomeContent/>
     </div>
   )
 }
