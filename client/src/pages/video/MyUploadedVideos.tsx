@@ -22,23 +22,23 @@ export default function MyUploadedVideos() {
               myVideos.map(
                 (e, i) => (
                   <VideoCard key={i}>
-                    <img src={e.image} alt="gv" className="rounded-lg w-fit h-[10rem] hover:bg-greenc" />
+                    <img src={e.v_cover} alt="gv" className="rounded-lg w-fit h-[10rem] hover:bg-greenc" />
                     <button type='button' className="absolute top-0 right-0 mt-1 mr-2 p-2  group-hover:visible" onClick={()=>removeVideos(i)}>
                       <p className="text-sm text-red-500">Remove</p>
                     </button>
                     <div className="p-4 w-full">
                       <div className="flex text-gray-600 text-sm items-center space-x-1">
-                        <p>{e.channel}</p>
+                        <p>{e.channel.c_name}</p>
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" className="fill-gray-600" viewBox="0 0 16 16">
                           <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
                         </svg>
                       </div>
                       <div className="flex justify-between items-center">
-                        <h3 className="text-md text-bold">{e.title}</h3>
+                        <h3 className="text-md text-bold">{e.v_title}</h3>
                         <p> {e.publised_time}</p>
                       </div>
                       <div className="text-sm text-gray-500 flex space-x-2 mt-2 justify-end">
-                        <p>{e.description}</p>
+                        <p>{e.v_desc}</p>
                       </div>
                     </div>
                   </VideoCard>
