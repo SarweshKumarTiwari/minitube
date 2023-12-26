@@ -42,7 +42,7 @@ function AfterAuth(props: { dropdown: boolean, setdropdown: React.Dispatch<SetSt
         </div>
     )
 }
-export default function BigScreenNav(props: { isUser: boolean, userName: string, logout: () => void }) {
+export default function BigScreenNav(props: { isUser: boolean|null, userName?: string, logout: () => void }) {
     const [dropdown, setdropdown] = useState(false)
     return (
         <div className=" max-md:hidden max-md:invisible sticky z-10 top-0 bg-[#ffffff] p-2">

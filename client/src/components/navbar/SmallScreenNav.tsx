@@ -56,7 +56,7 @@ function AfterAuth() {
         </div>
     )
 }
-export default function SmallScreenNav(props: { isUser: boolean,userName:string}) {
+export default function SmallScreenNav(props: { isUser: boolean|null,userName?:string}) {
     const [dropdown, setdropdown] = useState(false);
     return (
         <div className="md:hidden md:invisible z-10 sticky top-0 bg-[#ffffff]">
