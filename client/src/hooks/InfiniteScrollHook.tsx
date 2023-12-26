@@ -2,7 +2,7 @@ import {useRef,useEffect,useCallback} from "react"
 export default function InfiniteScrollHook() {
     const divReference = useRef<HTMLDivElement|null>(null);
     const observerCallback=useCallback((entries:IntersectionObserverEntry[])=>{
-        console.log(entries[0].isIntersecting);
+        //do something
     },[])
     useEffect(() => {
       const rf=divReference.current
