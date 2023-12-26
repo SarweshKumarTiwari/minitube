@@ -56,14 +56,14 @@ class Auth {
         }
         try {
             const data = <any>tokenHandler.verifyToken(req.cookies.rt, process.env.REFRESH_TOKEN as string);
-            const userLogged = await usersModels.getUserByFields({ _id: data.uid }, { refresh_token: 1 })
+            const userLogged = await usersModels.getUserByFields({ _id: data.uid }, { refresh_token: 1,name:1})
             if (!userLogged) {
                 return res.status(400).json({ error: "user not verified" })
             }
             if (userLogged.refresh_token !== req.cookies.rt) {
                 return res.status(400).json({ error: "user not authentic" })
             }
-            const { access_token, refresh_token } = getTokens(data.uid);
+            const { access_token, refresh_token } = getTokens(data.uid,userLogged.name);
             await usersModels.updateUser(data.uid as string, { refresh_token: refresh_token });
             res.cookie("at", access_token, cookieOptions);
             res.cookie("rt", refresh_token, cookieOptions);
