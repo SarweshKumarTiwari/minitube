@@ -7,19 +7,22 @@ import NavHolders from "./NavHolders";
 import Search from "../pages/Search";
 import SignUp from "../pages/SignUp";
 import SignIn from "../pages/SignIn";
+import ProtectedRoutes from "./ProtectedRoutes";
 export default function WebRoutes() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<NavHolders/>}>
+        <Route path="/" element={<NavHolders />}>
+          <Route path="" element={<ProtectedRoutes />}>
+            <Route path="history" element={<History />} />
+            <Route path="myvideos" element={<MyVideos />} />
+          </Route>
           <Route path="signup" element={<SignUp />} />
           <Route path="signin" element={<SignIn />} />
           <Route path="watch" element={<Player />} />
-          <Route path="history" element={<History />} />
-          <Route path="myvideos" element={<MyVideos />} />
-          <Route index element={<Home/>}/>
+          <Route index element={<Home />} />
         </Route>
-        <Route path="/search" element={<Search/>}/>
+        <Route path="/search" element={<Search />} />
       </Routes>
     </Router>
   )
