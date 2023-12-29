@@ -10,7 +10,7 @@ export default function InfiniteScrollHook() {
       if(rf) observeIntersection.observe(rf);
     
       return () => {
-        if(rf) observeIntersection.observe(rf);
+        if(rf) observeIntersection.unobserve(rf);
       }
     }, [observerCallback])
 
