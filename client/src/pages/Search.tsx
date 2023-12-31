@@ -4,6 +4,7 @@ import Spinner from '../components/spinner/Spinner';
 import GridContainer from '../components/containers/GridContainer';
 import VideoGridCard from '../components/cards/VideoGridCard';
 import Container from '../components/containers/Container';
+import { Link } from 'react-router-dom';
 
 export default function Search() {
     const [searchItem, setsearchItem] = useState("");
@@ -36,13 +37,15 @@ export default function Search() {
                 <Spinner />
                 :
                 searcResults?.length ?
-                   <Container>
-                    <GridContainer>
-                        {searcResults.map((e,i)=>
-                            <VideoGridCard data={e} key={i}/>
-                        )}
-                    </GridContainer>
-                   </Container>
+                    <Container>
+                        <GridContainer>
+                            {searcResults.map((e, i) =>
+                                <Link to='/watch' state={e} key={i}>
+                                    <VideoGridCard data={e} />
+                                </Link>
+                            )}
+                        </GridContainer>
+                    </Container>
                     :
                     <div>not Found</div>
             }
