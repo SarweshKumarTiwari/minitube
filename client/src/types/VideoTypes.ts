@@ -7,7 +7,8 @@ interface videoTypes{
         _id:string
         c_name:string
     }
-    v_cover:string
+    v_cover:string,
+    v_url?:string
     v_categ?:string
 }
 
