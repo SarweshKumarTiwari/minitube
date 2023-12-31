@@ -1,7 +1,7 @@
 import logo from "../assets/icon-50x50.png"
 export default function SignUp() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
+    <div className="min-h-screen flex flex-col items-center pt-4 bg-gray-100">
       <div className="relative flex flex-col bg-white shadow-md px-4 sm:px-6 md:px-8 lg:px-10 py-4 rounded-md w-full max-w-sm">
         <div className="flex w-full space-x-2 items-center justify-center">
           <img src={logo} alt="logo" width={50} height={50} />
