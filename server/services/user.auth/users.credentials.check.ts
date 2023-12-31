@@ -1,3 +1,4 @@
+import dateConverter from "../../utils/convertDate";
 import password from "../../utils/password"
 import tokenHandler from "../../utils/tokenHandler";
 
@@ -8,16 +9,16 @@ type creds = {
 }
 export function getTokens(id?:string,name?:string){
     const access_token = tokenHandler.generateToken({
-        iat:Math.floor(Date.now()/1000),
-        exp:Math.floor(Date.now() / 1000)+60*60,
+        iat:dateConverter(),
+        exp:dateConverter(process.env.ACCESS_TOKEN_TIME_LIMIT||0),
         uid:id,
         name:name
     },
     process.env.ACCESS_TOKEN as string
     )
     const refresh_token=tokenHandler.generateToken({
-        iat:Math.floor(Date.now()/1000),
-        exp:Math.floor(Date.now() / 1000)+(60*60*24*30),
+        iat:dateConverter(),
+        exp:dateConverter(process.env.REFRESH_TOKEN_TIME_LIMIT),
         uid:id
     },
     process.env.REFRESH_TOKEN as string
