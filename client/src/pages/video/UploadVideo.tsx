@@ -5,6 +5,7 @@ type InputTypes = {
   title: string
   description: string
   channel: string
+  cover:File
 }
 export default function UploadVideo() {
   const data = {
@@ -28,6 +29,16 @@ export default function UploadVideo() {
             <div className="flex space-x-1">
               <label htmlFor="video" className="p-2 rounded-lg bg-greenc text-white w-[35%] text-center">Upload</label>
               <input type="file" accept="video/*" id="video" className="invisible w-0" {...register("video")} />
+              <div className="border border-gray-300 rounded-md w-[65%] p-2">No file selected</div>
+            </div>
+          </div>
+          <div className="flex flex-col mt-2">
+            <p className="text-md text-gray-600">
+              Upload Cover:
+            </p>
+            <div className="flex space-x-1">
+              <label htmlFor="cover" className="p-2 rounded-lg bg-greenc text-white w-[35%] text-center">Upload</label>
+              <input type="file" accept="image/*" id="cover" className="invisible w-0" {...register("cover")} />
               <div className="border border-gray-300 rounded-md w-[65%] p-2">No file selected</div>
             </div>
           </div>
