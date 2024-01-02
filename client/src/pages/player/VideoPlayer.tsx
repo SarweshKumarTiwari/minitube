@@ -1,14 +1,24 @@
 import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
 export default function VideoPlayer() {
   const { state } = useLocation();
+  const loc=useLocation();
+  useEffect(() => {
+    return () => {
+      if (loc) {
+        console.log(loc.pathname)
+      }
+    }
+  }, [loc.pathname])
+  
   return (
     <>
       <hr />
       <div className="border-t-[1px] border-gray-200 m-auto mt-2  w-full md:w-[65%] lg:w-[50%]">
         <div className="m-auto w-[100%] = border-[1px] border-gray-400 rounded-lg shadow-md">
-          <video controls className="w-full h-full rounded-lg"  >
-            <source src="http://localhost:3000/Videos/flower.webm" type="video/webm" />
-            <source src="http://localhost:3000/Videos/flower.mp4" type="video/mp4" />
+          <video controls className="w-full h-full rounded-lg" >
+            <source src="http://localhost:3000/Videos/test.webm" type="video/webm" />
+            <source src="http://localhost:3000/Videos/test.mp4" type="video/mp4" />
           </video>
         </div>
         <div className="mt-2 mx-2 p-1">
@@ -17,7 +27,7 @@ export default function VideoPlayer() {
           </h3>
           <div className="flex justify-between">
             <div className="flex text-gray-600 text-sm items-center space-x-1">
-              <p>{state.channel}</p>
+              <p>{state.channel.c_name}</p>
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" className="fill-gray-600" viewBox="0 0 16 16">
                 <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
               </svg>
@@ -25,7 +35,7 @@ export default function VideoPlayer() {
             <p>{state.publised_time}</p>
           </div>
           <div className="text-sm text-gray-500">
-            {state.description}
+            {state.desc}
           </div>
         </div>
       </div>
