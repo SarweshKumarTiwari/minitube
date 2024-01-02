@@ -8,7 +8,10 @@ type searchType={
 export default function SearchingHook({searchItem,setLoading}:searchType) {
     const [searchResults, setsearchResults] = useState<videoTypes[]|null>(null);
 
-    const searchVideos=async ()=>{
+    
+
+    useEffect(() => {
+      const searchVideos=async ()=>{
         try {
             if (!searchItem.trim()) {
                 return;
@@ -24,12 +27,10 @@ export default function SearchingHook({searchItem,setLoading}:searchType) {
             console.log(error);
         }
     }
-
-    useEffect(() => {
       //using toggler
       const timeStack=setTimeout(()=>searchVideos(),500)
       return ()=>clearTimeout(timeStack);
-    }, [searchItem])
+    }, [searchItem,setLoading])
     
   return searchResults;
 }
