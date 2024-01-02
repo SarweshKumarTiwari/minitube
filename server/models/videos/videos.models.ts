@@ -48,7 +48,7 @@ class VideoModules{
     async getVideoByTitle(title:string,limit:number=9){
         const data=await videosEntity.find({v_title:title})
         .limit(limit)
-        .populate("channel","-u_id")
+        .populate("channel","-u_id -c_videos -subscribers")
         return {data:data};
     }
 }
