@@ -43,15 +43,15 @@ function AfterAuth(props: { dropdown: boolean, setdropdown: React.Dispatch<SetSt
     )
 }
 export default function BigScreenNav(props: { isUser: boolean|null, userName?: string, logout: () => void }) {
-    const [dropdown, setdropdown] = useState(false)
+    const [dropdown, setdropdown] = useState(false);
     return (
-        <div className=" max-md:hidden max-md:invisible sticky z-10 top-0 bg-[#ffffff] p-2">
+        <div className=" max-md:hidden max-md:invisible sticky z-10 top-0 py-2 px-10 bg-gray-50">
             <div className="flex justify-between items-center max-h-full ">
                 <NavLink to="/" className="flex items-center space-x-[6px]">
                     <img src={logo1} alt="logo" width={50} height={50} />
                     <h2 className="text-2xl text-gray-800">MiniTube</h2>
                 </NavLink>
-                <NavLink to="/search" className="p-2 flex space-x-2 items-center border border-gray-300 rounded-md">
+                <NavLink to="/search" className="p-2 flex space-x-2 items-center border border-gray-400 rounded-md">
                     <div>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" className="fill-gray-400 stroke-2" viewBox="0 0 16 16">
                             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
@@ -63,7 +63,7 @@ export default function BigScreenNav(props: { isUser: boolean|null, userName?: s
             </div>
             {dropdown && <div className="relative" >
                 <div className="absolute bg-gray-100 rounded-lg top-0 right-0 mr-4 max-w-[12rem] p-2 border-[1px]">
-
+                    <p className="text-gray-600 text-center">{props.userName?.toUpperCase()}</p>
                     <NavLink to="/" className="flex p-2 space-x-[4px] text-gray-600  items-center" >
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" className="fill-gray-600" viewBox="0 0 16 16">
                             <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z" />
