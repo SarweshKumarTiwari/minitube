@@ -9,8 +9,11 @@ import { CustomRequest } from "../../types/customAPITypes";
 
 class Auth {
     public authorization = asyncHandler(async function (req: Request, res: Response) {
-        let cookieOptions = {
-            httpOnly: true
+        let cookieOptions:CookieOptions= {
+            httpOnly: true,
+            sameSite:"strict",
+            secure:true,
+            path:'/'
         }
         if (!(req.body.email && req.body.password)) {
             throw new AppError("Some fields are empty",400)
@@ -30,8 +33,9 @@ class Auth {
             throw new AppError(result.error,400);
         };
         await usersModels.updateUser(data._id as string, { refresh_token: result.refresh_token });
-        res.cookie("at", result.access_token, cookieOptions)
-        res.cookie("rt", result.refresh_token, cookieOptions)
+        res.cookie("isLogged",1,{sameSite:"strict",secure:true,maxAge:Number(process.env.REFRESH_TOKEN_TIME_LIMIT)*1000})
+        res.cookie("at", result.access_token, {...cookieOptions,maxAge:Number(process.env.REFRESH_TOKEN_TIME_LIMIT)*1000})
+        res.cookie("rt", result.refresh_token, {...cookieOptions,maxAge:Number(process.env.REFRESH_TOKEN_TIME_LIMIT)*1000})
         res.status(200).json({ success: "successfull" })
     })
     async authenticate(req: CustomRequest, res: Response, next: NextFunction) {
@@ -51,8 +55,11 @@ class Auth {
     }
 
     async getAccessToken(req: Request, res: Response) {
-        let cookieOptions = {
+        let cookieOptions:CookieOptions= {
             httpOnly: true,
+            sameSite:"strict",
+            secure:true,
+            path:'/'
         }
         try {
             const data = <any>tokenHandler.verifyToken(req.cookies.rt, process.env.REFRESH_TOKEN as string);
@@ -61,12 +68,15 @@ class Auth {
                 return res.status(400).json({ error: "user not verified" })
             }
             if (userLogged.refresh_token !== req.cookies.rt) {
+                await usersModels.updateUser(data.uid as string, { refresh_token:undefined});
+                res.clearCookie("at").clearCookie("rt").clearCookie("isLogged")
                 return res.status(400).json({ error: "user not authentic" })
             }
             const { access_token, refresh_token } = getTokens(data.uid,userLogged.name);
             await usersModels.updateUser(data.uid as string, { refresh_token: refresh_token });
-            res.cookie("at", access_token, cookieOptions);
-            res.cookie("rt", refresh_token, cookieOptions);
+            res.cookie("isLogged",1,{sameSite:"strict",secure:true,maxAge:Number(process.env.REFRESH_TOKEN_TIME_LIMIT)*1000})
+            res.cookie("at", access_token, {...cookieOptions,maxAge:Number(process.env.REFRESH_TOKEN_TIME_LIMIT)});
+            res.cookie("rt", refresh_token, {...cookieOptions,maxAge:Number(process.env.REFRESH_TOKEN_TIME_LIMIT)});
             return res.status(200).json({ success: "ok" });
 
         } catch (error) {
@@ -80,16 +90,16 @@ class Auth {
         }
     }
     check(req: CustomRequest, res: Response) {
-        return res.status(200).json({ success: req.user });
+        return res.status(200).json({ success: req.user.name });
     }
 
     public logout = asyncHandler(async function (req: CustomRequest, res: Response) {
         if (!req.user.uid) {
             throw new AppError("Something went wrong around auth", 400);
         }
-        await usersModels.updateUser(req.user.uid, { refresh_token: "" });
+        await usersModels.updateUser(req.user.uid, { refresh_token:undefined });
         res.clearCookie("at")
-        .clearCookie("rt")
+        .clearCookie("rt").clearCookie("isLogged")
         .status(200).json({ success: "user logged out successfully" });
     })
 }
