@@ -3,12 +3,14 @@ import asyncHandler from "../utils/asyncHandler";
 import { AppError } from "../utils/errorHander";
 import commentsModels from "../models/comments/comments.models";
 import videosModels from "../models/videos/videos.models";
+import { CustomRequest } from "../types/customAPITypes";
  class CommentControllers{
-    public isCommentAllowed =asyncHandler(async function (req:Request,res:Response,next:NextFunction){
+    public isCommentAllowed =asyncHandler(async function (req:CustomRequest,res:Response,next:NextFunction){
         const request=req.body
-        if (!(request.u_name&&request.comment&&request.u_id&&request.v_id)) {
+        if (!(request.u_name&&request.comment&&request.v_id)) {
             throw new AppError("You have missed some fields",400)
         }
+        request.u_id=req.user.uid;
         const {allow_comments}=await videosModels.getOneVideo(request.v_id);
         if (!allow_comments) {
             throw new AppError("No one is allowed to post comment",400)
@@ -29,11 +31,11 @@ import videosModels from "../models/videos/videos.models";
         res.status(200).json({success:result});
     })
 
-    public getAllUserComments =asyncHandler(async function (req:Request,res:Response){
+    public getAllUserComments =asyncHandler(async function (req:CustomRequest,res:Response){
         if (!req.params.u_id) {
             throw new AppError("no user id found",400)
         }
-        const result=await commentsModels.getAllComments(req.params.u_id);
+        const result=await commentsModels.getAllComments(req.user.uid);
         res.status(200).json({success:result})
     })
 

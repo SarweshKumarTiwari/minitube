@@ -8,7 +8,7 @@ historyRoutes.post("/addhistory",
 userAuth.authenticate,
 historyControllers.addHistory)
 
-historyRoutes.get("/gethistory/:u_id?",
+historyRoutes.get("/gethistory",
 userAuth.authenticate,
 historyControllers.showAllHistory)
 
@@ -16,7 +16,7 @@ historyRoutes.delete("/deleteahistory/:h_id?",
 userAuth.authenticate,
 historyControllers.deleteAHistory)
 
-historyRoutes.delete("/clearhistory/:u_id?",
+historyRoutes.delete("/clearhistory?",
 userAuth.authenticate,
 historyControllers.clearAllHistory)
 

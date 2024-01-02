@@ -13,7 +13,7 @@ commentRoutes.get("/getcomments/:v_id?",
 userAuth.authenticate,
 commentsControllers.getAllUserComments);
 
-commentRoutes.get("/getusercomments/:u_id?",
+commentRoutes.get("/getusercomments",
 userAuth.authenticate,
 commentsControllers.getAllUserComments);
 
