@@ -5,10 +5,15 @@ const history=new Schema({
         type:String,
         required:true
     },
-    url:{
-        type:String,
+    v_id:{
+        type:Schema.Types.ObjectId,
         required:true
     },
+    duration:{
+        type:Number,
+        required:true
+    }
+    ,
     u_id:{
         type:Schema.Types.ObjectId,
         ref:"users",

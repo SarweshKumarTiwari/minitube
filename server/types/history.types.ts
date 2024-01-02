@@ -1,5 +1,6 @@
 export type historyType={
     u_id:string,
     title:string,
-    url:string
+   v_id:string,
+   duration:number
 }
