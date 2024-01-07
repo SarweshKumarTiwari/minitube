@@ -1,25 +1,24 @@
-import { useContext } from 'react'
 import Container from '../../components/containers/Container'
 import ListContainers from '../../components/containers/ListContainers'
 import VideoCard from '../../components/cards/VideoCard'
-import { Link } from 'react-router-dom'
-import historyContext from '../../contexts/history/HistoryContext'
+import { Link } from 'react-router-dom';
+import { useDispatch,useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../app/store';
+import { clearOneHistory } from '../../app/historySlices';
 
 export default function HistoryList() {
-  
-  const history=useContext(historyContext);
-  
-
+  const history=useSelector((state:RootState)=>state.historySlices.history);
+  const dispatch:AppDispatch=useDispatch();
   return (
     <Container>
       <div className='w-full'>
         <h1 className="text-gray-600 text-center mb-2 text-3xl">History : </h1>
         <ListContainers>
-          {history?.historyData?.length ? history.historyData.map(
+          {history.length ? history.map(
             (e, i) => <div key={i}>
               <Link to="/watch" state={e} >
                 <VideoCard >
-                  <img src={e.v_cover} alt="gv" className="rounded-lg w-fit h-[10rem] hover:bg-greenc" />
+                  <img src={e.v_cover} alt="gv" className="rounded-lg w-fit md:w-[23rem] h-[10rem] hover:bg-greenc" />
                   <div className="relative p-4 w-full">
                     <div className="flex text-gray-600 text-sm items-center space-x-1">
                       <p>{e.channel.c_name}</p>
@@ -34,7 +33,7 @@ export default function HistoryList() {
                     <div className="text-sm text-gray-500 flex space-x-2 mt-2 justify-end">
                       <p>{e.v_desc}</p>
                     </div>
-                    <button type='button' className="absolute top-0 right-0 mt-1 mr-2 p-2  group-hover:visible" onClick={(e) => { e.preventDefault();history.clearOneHistory(i)}}>
+                    <button type='button' className="absolute top-0 right-0 mt-1 mr-2 p-2  group-hover:visible" onClick={(e) => { e.preventDefault();dispatch(clearOneHistory({id:i}))}}>
                       <p className="text-sm text-red-500">Remove</p>
                     </button>
                   </div>
