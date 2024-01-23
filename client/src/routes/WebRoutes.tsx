@@ -8,6 +8,7 @@ import Search from "../pages/Search";
 import SignUp from "../pages/SignUp";
 import SignIn from "../pages/SignIn";
 import ProtectedRoutes from "./ProtectedRoutes";
+import Channels from "../pages/Channels";
 export default function WebRoutes() {
   return (
     <Router>
@@ -16,6 +17,7 @@ export default function WebRoutes() {
           <Route path="" element={<ProtectedRoutes />}>
             <Route path="history" element={<History />} />
             <Route path="myvideos" element={<MyVideos />} />
+            <Route path="channels" element={<Channels/>}/>
           </Route>
           <Route path="signup" element={<SignUp />} />
           <Route path="signin" element={<SignIn />} />
