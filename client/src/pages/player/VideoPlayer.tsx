@@ -4,11 +4,7 @@ export default function VideoPlayer() {
   const { state } = useLocation();
   const loc=useLocation();
   useEffect(() => {
-    return () => {
-      if (loc) {
-        console.log(loc.pathname)
-      }
-    }
+    
   }, [loc.pathname])
   
   return (
